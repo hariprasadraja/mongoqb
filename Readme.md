@@ -2,15 +2,18 @@
 
 mongoqb is a versatile query builder for mongodb from http request built in golang.  
 
-  - do a Request like http://localhost:9000?filterBy=name(and),emailId(or),age&name=hari,rahul,krishnan&emailId=hariprasadcsmails@gmail.com&age=24,
+  - do a Request 
+  
+  http://localhost:9000?filterBy=name(and),emailId(or),age&name=hari,rahul,krishnan&emailId=hariprasadcsmails@gmail.com&age=24,
 
-  - get a mgo query as bson.M
+  - get a well structured mongodb query for golang. 
+  
   bson.M{
 				"name":            bson.M{"$and": []string{"hari", "rahul", "krishnan"}},
 				"contact.emailId": bson.M{"$or": []string{"hariprasadcsmails@gmail.com"}},
 				"personal.age":    "24",
 			},
-  - Magic
+  - go ahead.
 
 # Features!
   - Build mongodb query from http request. 
@@ -37,12 +40,18 @@ To install dependencies, run the below
 $ go get gopkg.in/mgo.v2
 ```
 
+Install mongoqb 
+
+```sh 
+$ go get github.com/hariprasadraja/mongoqb
+
+```
+
+
 ### Development
 
 Want to contribute? Great!
 contact me @ hariprasadcsmails@gmail.com
-
-**Free Software, Hell Yeah!**
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
