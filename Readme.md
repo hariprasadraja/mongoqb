@@ -1,6 +1,6 @@
 # mongoqb
 
-mongoqb is a versetaile query builder for mongodb from http request built in golang.  
+mongoqb is a versatile query builder for mongodb from http request built in golang.  
 
   - do a Request like http://localhost:9000?filterBy=name(and),emailId(or),age&name=hari,rahul,krishnan&emailId=hariprasadcsmails@gmail.com&age=24,
 
