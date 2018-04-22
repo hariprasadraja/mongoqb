@@ -6,7 +6,7 @@ mongoqb is a versatile query builder for mongodb from http request built in gola
   
   http://localhost:9000?filterBy=name(and),emailId(or),age&name=hari,rahul,krishnan&emailId=hariprasadcsmails@gmail.com&age=24,
 
-  - get a well structured mongodb query for golang. 
+  - get a well structured mongodb query in golang. 
   
   bson.M{
 				"name":            bson.M{"$and": []string{"hari", "rahul", "krishnan"}},
@@ -25,14 +25,8 @@ mongoqb is a versatile query builder for mongodb from http request built in gola
 mongoqb uses only one source projects to work properly:
 * [mgo] - a powerfull golang mongodb driver. 
 
-
-And of course mongodb itself is open source with a [public repository][dill]
- on GitHub.
-
 ### Installation
 mongoqb requires [mgo](https://labix.org/mgo) v2 to run.
-
-Install the dependencies by the following
 
 To install dependencies, run the below 
 
