@@ -53,7 +53,7 @@ func BuildQuery(r *http.Request, keymap map[string]Options) (bson.M, error) {
 	filterBy := r.URL.Query().Get("filterBy")
 	filters := strings.Split(filterBy, ",")
 
-	//TODO: make this verfication as optional after implementing configurations.
+	//TODO: make this verification as optional after implementing configurations.
 	for _, filterKey := range filters {
 		var rgx = regexp.MustCompile(`\((.*?)\)`)
 		operator := rgx.FindString(filterKey)
