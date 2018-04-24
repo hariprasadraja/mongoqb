@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	"gopkg.in/mgo.v2/bson"
-    "mongoqb/qb"
+	"mongoqb/qb"
 )
 
 func TestBuildQuery(t *testing.T) {
@@ -29,7 +29,7 @@ func TestBuildQuery(t *testing.T) {
 			name: "examine single filter params",
 			args: args{
 				allowedkeys: map[string]qb.Options{
-					"name": qb.Options{
+					"name": {
 						DBPath: "name",
 					},
 				},
@@ -105,7 +105,7 @@ func TestBuildQuery(t *testing.T) {
 			want: bson.M{
 				"name":            bson.M{"$and": []string{"hari", "rahul", "krishnan"}},
 				"contact.emailId": bson.M{"$or": []string{"hariprasadcsmails@gmail.com"}},
-				"personal.age":    bson.M{"$lte":"24"},
+				"personal.age":    bson.M{"$lte": "24"},
 			},
 			wantErr: false,
 			url:     "http://localhost:9000?filterBy=name(and),emailId(or),age(lte)&name=hari,rahul,krishnan&emailId=hariprasadcsmails@gmail.com&age=24",

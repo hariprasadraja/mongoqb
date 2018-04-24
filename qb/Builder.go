@@ -47,7 +47,7 @@ type Options struct {
 	DoBefore      func(string) (interface{}, error)
 }
 
-// BuildQuery builds a mongodb query from the request url. 
+// BuildQuery builds a mongodb query from the request url.
 func BuildQuery(r *http.Request, keymap map[string]Options) (bson.M, error) {
 	query := make(bson.M, 0)
 	filterBy := r.URL.Query().Get("filterBy")
@@ -79,7 +79,7 @@ func BuildQuery(r *http.Request, keymap map[string]Options) (bson.M, error) {
 		}
 
 		if lop, ok := logicalOperators[operator]; ok {
-			values := strings.Split(filterValue,",")
+			values := strings.Split(filterValue, ",")
 			logicalQuery, err := options.logicalQuery(query, lop, values)
 			if err != nil {
 				return query, err
@@ -89,11 +89,11 @@ func BuildQuery(r *http.Request, keymap map[string]Options) (bson.M, error) {
 			continue
 		}
 
-        if cop,ok := comparisonOperators[operator];ok {
+		if cop, ok := comparisonOperators[operator]; ok {
 			log.Print("cop", cop)
-            comparisonQuery, err := options.compasionQuery(query,cop,filterValue)
+			comparisonQuery, err := options.compasionQuery(query, cop, filterValue)
 			if err != nil {
-				return query,err
+				return query, err
 			}
 
 			println(comparisonQuery)
@@ -106,11 +106,11 @@ func BuildQuery(r *http.Request, keymap map[string]Options) (bson.M, error) {
 			if err != nil {
 				return query, err
 			}
-			
+
 			continue
 		}
 
-        return query, errors.New(operator + " - operator is not allowed.")
+		return query, errors.New(operator + " - operator is not allowed.")
 	}
 
 	return query, nil
@@ -138,7 +138,7 @@ func (options Options) logicalQuery(query bson.M, operator string, values []stri
 	return query, nil
 }
 
-func (options Options) defaultQuery(query bson.M,value string) (bson.M, error) {
+func (options Options) defaultQuery(query bson.M, value string) (bson.M, error) {
 
 	if options.DoBefore != nil {
 		modifiedValue, err := options.DoBefore(value)
@@ -152,39 +152,39 @@ func (options Options) defaultQuery(query bson.M,value string) (bson.M, error) {
 	return query, nil
 }
 
-func (options Options) compasionQuery(query bson.M, operator, value string) (bson.M,error){
+func (options Options) compasionQuery(query bson.M, operator, value string) (bson.M, error) {
 	if options.DoBefore != nil {
 		modifiedValue, err := options.DoBefore(value)
 		if err != nil {
 			return query, err
 		}
 
-		query[options.DBPath] = bson.M{operator:modifiedValue}
+		query[options.DBPath] = bson.M{operator: modifiedValue}
 	}
 
-	query[options.DBPath] = bson.M{operator:value}
+	query[options.DBPath] = bson.M{operator: value}
 	return query, nil
 }
 
-func (options Options) elementQuery(query bson.M,operator, value string) (bson.M,error) {
+func (options Options) elementQuery(query bson.M, operator, value string) (bson.M, error) {
 	if operator == "$exists" {
 		modifiedValue, err := options.DoBefore(value)
 		if err != nil {
 			return query, err
 		}
 
-		query[options.DBPath] = bson.M{operator:modifiedValue}
+		query[options.DBPath] = bson.M{operator: modifiedValue}
 	}
-   
-    if operator == "$type" {
+
+	if operator == "$type" {
 		modifiedValue, err := options.DoBefore(value)
 		if err != nil {
 			return query, err
 		}
 
-		query[options.DBPath] = bson.M{operator:modifiedValue}
+		query[options.DBPath] = bson.M{operator: modifiedValue}
 
 	}
 
-	return query,nil
+	return query, nil
 }
