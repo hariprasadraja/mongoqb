@@ -7,7 +7,7 @@ mongoqb is a versatile query builder for mongodb from http request built in gola
 | Request Query            | Monogo DB Query        | Operators |
 | ----------------------- | ---------------------- | --------- |
 | filterBy=name&name=hari | bson.M{"name": "hari"} | None      |
-| filterBy=name(and),emailId(or),age&name=hari,rahul,krishnan&emailId=hariprasadcsmails@gmail.com&age=24|bson.M{"name":bson.M{"$and": []string{"hari", "rahul", "krishnan"}},"contact.emailId": bson.M{"$or": []string{"hariprasadcsmails@gmail.com"}},"personal.age":    "24",}| conditional operators|
+| filterBy=name(and),emailId(or),age&name=hari,rahul,krishnan|bson.M{"name":bson.M{"$and": []string{"hari", "rahul", "krishnan"}}}| conditional operators|
 
 ## Features
 
