@@ -1,46 +1,50 @@
 # mongoqb
 
-mongoqb is a versatile query builder for mongodb from http request built in golang.  
+mongoqb is a versatile query builder for mongodb from http request built in golang.
 
-  - do a Request 
-  
-  http://localhost:9000?filterBy=name(and),emailId(or),age&name=hari,rahul,krishnan&emailId=hariprasadcsmails@gmail.com&age=24,
+## How It works
 
-  - get a well structured mongodb query in golang. 
-  
-  bson.M{
-				"name":            bson.M{"$and": []string{"hari", "rahul", "krishnan"}},
-				"contact.emailId": bson.M{"$or": []string{"hariprasadcsmails@gmail.com"}},
-				"personal.age":    "24",
-			},
-  - go ahead.
+| Request Query            | Monogo DB Query        | Operators |
+| ----------------------- | ---------------------- | --------- |
+| filterBy=name&name=hari | bson.M{"name": "hari"} | None      |
+| filterBy=name(and),emailId(or),age&name=hari,rahul,krishnan&emailId=hariprasadcsmails@gmail.com&age=24|bson.M{"name":bson.M{"$and": []string{"hari", "rahul", "krishnan"}},"contact.emailId": bson.M{"$or": []string{"hariprasadcsmails@gmail.com"}},"personal.age":    "24",}| conditional operators|
 
-# Features!
-  - Build mongodb query from http request. 
-  - Conditional operators in mongodb are allowed. 
-  - Custom functions to do operations before making mongodb query.
-  - Only exported keys are allowed to transform into mongodb query. 
+## Features
+
+- Build mongodb query from http request.
+- Conditional operators in mongodb are allowed.
+- Custom functions to do operations before making mongodb query.
+- Only exported keys are allowed to transform into mongodb query.
 
 ### Dependencies
+
 mongoqb uses only one source projects to work properly:
-* [mgo] - a powerfull golang mongodb driver. 
+
+- [mgo] - a powerfull golang mongodb driver.
 
 ### Installation
+
 mongoqb requires [mgo](https://labix.org/mgo) v2 to run.
 
-To install dependencies, run the below 
+To install dependencies, run the below
 
 ```sh
-$ go get gopkg.in/mgo.v2
+go get gopkg.in/mgo.v2
 ```
 
-Install mongoqb 
+Install mongoqb
 
-```sh 
-$ go get github.com/hariprasadraja/mongoqb
+```sh
+go get github.com/hariprasadraja/mongoqb
 
 ```
 
+### TODO's
+
+1. Need to add more examples.
+2. extend functionality to all operators
+3. paras query from request body.
+4. parse query from from inputs.
 
 ### Development
 
