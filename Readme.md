@@ -43,9 +43,8 @@ go get github.com/hariprasadraja/mongoqb
 
 1. Need to add more examples.
 2. extend functionality to all operators
-3. paras query from request body.
-4. parse query from from inputs.
-
+3. paras query from request body. if the request is made via post call. 
+4. parse query from the form request. 
 ### Development
 
 Want to contribute? Great!
