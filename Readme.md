@@ -1,4 +1,5 @@
-# mongoqb
+# mongoqb 
+## (Stopped Developement due to lack of support & personal time) 
 
 mongoqb is a versatile query builder for mongodb from http request built in golang.
 
